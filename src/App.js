@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import { CreateStore } from "redux";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
-import Login from "./login";
-import NavBar from "./NavBar";
+import Login from "./components/Login";
+import NavBar from "./components/NavBar";
 
 class App extends Component {
    render() {
       return (
          <>
             <NavBar />
-            <Login />
+            <Switch>
+               <Route exact path="/" component={Login} />
+            </Switch>
          </>
       );
    }
 }
 
-export default App;
+export default withRouter(App);
