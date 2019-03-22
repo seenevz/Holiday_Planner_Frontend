@@ -2,15 +2,22 @@ import React from "react";
 
 export default class CreateTripForm extends React.Component {
    render() {
-      const { city, mood, numberPeople, beginDate, endDate } = this.props;
+      const {
+         country,
+         city,
+         mood,
+         numberPeople,
+         beginDate,
+         endDate,
+      } = this.props;
 
       return (
          <form className="create-form">
-            <label htmlFor="city">Where to</label>
+            <label htmlFor="country">Country</label>
             <input
-               id="city"
-               name="city"
-               value={city}
+               id="country"
+               name="country"
+               value={country}
                onChange={this.props.handleChangeInput}
             />
             <label htmlFor="mood">Mood</label>

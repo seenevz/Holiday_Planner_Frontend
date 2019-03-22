@@ -19,9 +19,40 @@
 }
 
 .places-container {
+   display: grid;
+   grid-template-columns: 2fr 1fr;
+   column-gap: 2%;
    border: 0.5px solid black;
    place-self: center;
-   height: 80%;
-   background: yellowgreen;
+   height: 100%;
+   width: 100%;
    grid-column: 2 / 3;
+}
+
+.places-picker {
+   display: grid;
+   grid-column: 1 / 2;
+   height: 80%;
+   width: 100%;
+   border: 0.5px solid black;
+   place-self: center;
+   background: orangered;
+}
+
+.selected-places {
+   display: grid;
+   height: 80%;
+   width: 100%;
+   border: 0.5px solid black;
+   place-self: center;
+   background: orange;
+   margin-inline-end: 5%;
+}
+
+.place-placeholder {
+   border: 0.5px solid black;
+   place-self: center;
+   background: green;
+   height: 97%;
+   width: 97%;
 }
