@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
@@ -9,20 +9,29 @@ import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-
-import { userReducer } from "./userReducer";
+import { setContext } from "apollo-link-context";
+import { reducer } from "./reducers/combineReducers";
 
 const httpLink = createHttpLink({
    uri: "http://localhost:3001/graphql",
 });
 
+const authLink = setContext((_, { headers }) => {
+   const token = sessionStorage.getItem("authToken");
+   return {
+      headers: {
+         ...headers,
+         authorization: token ? `Bearer ${token}` : "",
+      },
+   };
+});
 const client = new ApolloClient({
-   link: httpLink,
+   link: authLink.concat(httpLink),
    cache: new InMemoryCache(),
 });
 
 const store = createStore(
-   userReducer,
+   reducer,
    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

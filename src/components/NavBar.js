@@ -1,8 +1,37 @@
 import React from "react";
-import "../navbar.css";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-export default class NavBar extends React.Component {
+import "../style/navbar.css";
+
+class NavBar extends React.Component {
+   handleLogout = () => {
+      this.props.clearUser();
+      sessionStorage.clear("auth_token");
+      this.props.history.push("/");
+   };
+
    render() {
-      return <div className="top" />;
+      const { firstName } = this.props.user;
+
+      return (
+         <div className="top">
+            <div className="user">{firstName}</div>
+            <div className="nav-button">
+               {firstName && (
+                  <button onClick={this.handleLogout}>Logout</button>
+               )}
+            </div>
+         </div>
+      );
    }
 }
+
+export default withRouter(
+   connect(
+      state => ({
+         user: state.user,
+      }),
+      dispatch => ({ clearUser: () => dispatch({ type: "CLEAR_USER" }) })
+   )(NavBar)
+);

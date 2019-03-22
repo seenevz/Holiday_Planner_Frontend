@@ -1,0 +1,16 @@
+.top {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   height: 7vh;
+   background: blue;
+}
+
+.nav-button {
+   grid-column: 3;
+   background: greenyellow;
+}
+
+.user {
+   grid-column: 1;
+   background: red;
+}
