@@ -6,6 +6,8 @@
 }
 
 .create-form {
+   display: grid;
+   grid-template-rows: 1fr 3fr;
    grid-column: 1 / 2;
    background: yellow;
    height: 70%;
@@ -50,6 +52,20 @@
 }
 
 .place-placeholder {
+   border: 0.5px solid black;
+   place-self: center;
+   background: green;
+   height: 97%;
+   width: 97%;
+}
+
+.city-container {
+   display: grid;
+   height: 100%;
+   grid-template-rows: 1fr 1fr;
+}
+
+.city-placeholder {
    border: 0.5px solid black;
    place-self: center;
    background: green;

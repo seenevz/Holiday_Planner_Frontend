@@ -3,6 +3,7 @@ import CreateTripForm from "../components/CreateTripForm";
 import { connect } from "react-redux";
 import PlacesPickerContainer from "./PlacesPickerContainer";
 import PlacesSelectedContainer from "./PlacesSelectedContainer";
+import FindCity from "../components/FindCity";
 
 class CreateTripContainer extends React.Component {
    state = {
@@ -14,18 +15,20 @@ class CreateTripContainer extends React.Component {
       endDate: "",
    };
 
-   componentDidMount;
-
    handleChangeInput = event => {
       this.setState({ [event.target.name]: event.target.value });
    };
    render() {
       return (
          <>
-            <CreateTripForm
-               {...this.state}
-               handleChangeInput={this.handleChangeInput}
-            />
+            {this.state.city ? (
+               <CreateTripForm
+                  {...this.state}
+                  handleChangeInput={this.handleChangeInput}
+               />
+            ) : (
+               <FindCity />
+            )}
             <div className="places-container">
                <PlacesPickerContainer />
                <PlacesSelectedContainer />
