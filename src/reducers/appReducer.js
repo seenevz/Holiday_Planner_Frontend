@@ -1,4 +1,5 @@
 export const appReducer = (state = { section: "", results: [] }, action) => {
+   console.log("State:", action);
    switch (action.type) {
       case "SET_SECTION":
          return { ...state, section: action.payload };

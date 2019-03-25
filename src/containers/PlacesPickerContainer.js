@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 class PlacesPickerContainer extends React.Component {
    render() {
       return (
-         <div className="places-picker">
+         <div className="create-trip-places-picker">
             <PlacePlaceholder />
          </div>
       );

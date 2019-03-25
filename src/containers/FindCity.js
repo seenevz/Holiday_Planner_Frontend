@@ -1,5 +1,5 @@
 import React from "react";
-import CityPlaceholder from "./CityPlaceholder";
+import CityPlaceholder from "../components/CityPlaceholder";
 import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
 import { connect } from "react-redux";

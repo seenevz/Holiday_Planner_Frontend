@@ -2,7 +2,7 @@ import React from "react";
 
 export default class CityPlaceholder extends React.Component {
    handleSelectCity = city => {
-      this.props.setCity({ city });
+      this.props.setCity(city);
    };
    render() {
       return (

@@ -3,7 +3,8 @@ import CreateTripForm from "../components/CreateTripForm";
 import { connect } from "react-redux";
 import PlacesPickerContainer from "./PlacesPickerContainer";
 import PlacesSelectedContainer from "./PlacesSelectedContainer";
-import FindCity from "../components/FindCity";
+import FindCity from "./FindCity";
+import FindPlaces from "./FindPlaces";
 
 class CreateTripContainer extends React.Component {
    handleChangeInput = event => {
@@ -11,25 +12,33 @@ class CreateTripContainer extends React.Component {
    };
    render() {
       return (
-         <>
-            {this.props.trip.city ? (
-               <CreateTripForm
-                  {...this.props}
-                  handleChangeInput={this.handleChangeInput}
-               />
-            ) : (
-               <FindCity
-                  results={this.props.app.results}
-                  city={this.props.app.searchTerm}
-                  setResults={this.props.setResults}
-                  handleChangeInput={this.handleChangeInput}
-               />
-            )}
-            <div className="places-container">
-               <PlacesPickerContainer />
-               <PlacesSelectedContainer />
+         <div className="create-trip-container">
+            <div className="create-trip-sidebar">
+               {this.props.trip.city ? (
+                  // <CreateTripForm
+                  //    {...this.props}
+                  //    handleChangeInput={this.handleChangeInput}
+                  // />
+                  <>
+                     <FindPlaces />
+                  </>
+               ) : (
+                  <FindCity
+                     results={this.props.app.results}
+                     city={this.props.app.searchTerm}
+                     setResults={this.props.setResults}
+                     handleChangeInput={this.handleChangeInput}
+                  />
+               )}
             </div>
-         </>
+            <div className="create-trip-places-container">
+               <div style={{ height: "100%" }}>{this.props.trip.city}</div>
+               <div className="selection-container">
+                  <PlacesPickerContainer />
+                  <PlacesSelectedContainer />
+               </div>
+            </div>
+         </div>
       );
    }
 }
