@@ -6,28 +6,24 @@ import PlacesSelectedContainer from "./PlacesSelectedContainer";
 import FindCity from "../components/FindCity";
 
 class CreateTripContainer extends React.Component {
-   state = {
-      country: "",
-      city: "",
-      mood: "",
-      numberPeople: "",
-      beginDate: "",
-      endDate: "",
-   };
-
    handleChangeInput = event => {
-      this.setState({ [event.target.name]: event.target.value });
+      this.props.setTripField({ [event.target.name]: event.target.value });
    };
    render() {
       return (
          <>
-            {this.state.city ? (
+            {this.props.trip.city ? (
                <CreateTripForm
-                  {...this.state}
+                  {...this.props}
                   handleChangeInput={this.handleChangeInput}
                />
             ) : (
-               <FindCity />
+               <FindCity
+                  results={this.props.app.results}
+                  city={this.props.app.searchTerm}
+                  setResults={this.props.setResults}
+                  handleChangeInput={this.handleChangeInput}
+               />
             )}
             <div className="places-container">
                <PlacesPickerContainer />
@@ -38,4 +34,14 @@ class CreateTripContainer extends React.Component {
    }
 }
 
-export default connect(null)(CreateTripContainer);
+export default connect(
+   state => ({
+      ...state,
+   }),
+   dispatch => ({
+      setTripField: field =>
+         dispatch({ type: "SET_SEARCHTERM", payload: field.search }),
+      setResults: results =>
+         dispatch({ type: "SET_RESULTS", payload: results }),
+   })
+)(CreateTripContainer);
