@@ -11,6 +11,7 @@
 
 .create-trip-sidebar {
    display: grid;
+   height: 100%;
 }
 
 .create-form {
@@ -40,6 +41,17 @@
    width: 100%;
    border: 0.5px solid black;
    background: orangered;
+}
+
+.select-place-tags {
+   display: grid;
+   grid-template-rows: 1fr 3fr 1fr;
+   grid-column: 1 / 2;
+   background: yellow;
+   height: 70%;
+   width: 80%;
+   place-self: center;
+   border: 0.5px solid black;
 }
 
 .selected-places {
@@ -94,6 +106,23 @@
 .selection-container {
    display: grid;
    grid-template-rows: 1fr 3fr;
+}
+
+.tags-container {
+   height: 47vh;
+   overflow: scroll;
+}
+
+.tags-search {
+   display: grid;
+   height: 100%;
+   width: 100%;
+   grid-template-rows: 1fr 1fr;
+}
+
+.tag {
+   border: 0.5px solid black;
+   display: inline-block;
 }
 
 h2 {

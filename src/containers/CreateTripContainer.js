@@ -20,7 +20,7 @@ class CreateTripContainer extends React.Component {
                   //    handleChangeInput={this.handleChangeInput}
                   // />
                   <>
-                     <FindPlaces />
+                     <FindPlaces setResults={this.props.setResults} />
                   </>
                ) : (
                   <FindCity
