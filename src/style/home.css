@@ -4,14 +4,14 @@
 }
 
 .create-trip-container {
-   height: 100%;
+   height: inherit;
    display: grid;
-   grid-template-columns: 1fr 2fr;
+   grid-template-columns: 33vw;
 }
 
 .create-trip-sidebar {
    display: grid;
-   height: 100%;
+   height: inherit;
 }
 
 .create-form {
@@ -27,20 +27,21 @@
 
 .create-trip-places-container {
    display: grid;
-   grid-template-rows: 10%;
+   grid-template-rows: 10% 90%;
    border: 0.5px solid black;
-   height: 100%;
+   height: inherit;
    width: 100%;
    grid-column: 2 / 3;
 }
 
 .create-trip-places-picker {
-   display: grid;
-   gerid-row: 2 / 3;
-   height: 100%;
-   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   grid-row: 2 /3;
    border: 0.5px solid black;
    background: orangered;
+   overflow-y: auto;
+   width: 100%;
 }
 
 .select-place-tags {
@@ -64,18 +65,32 @@
    background: orange;
 }
 
-.place-placeholder {
+.place-card {
+   display: flex;
    border: 0.5px solid black;
-   place-self: center;
-   background: green;
-   height: 97%;
-   width: 97%;
+   height: 50%;
+   width: 33%;
+   overflow: hidden;
+   position: relative;
+}
+
+.place-card > img {
+   height: 100%;
+}
+.place-card > div {
+   z-index: 10;
+   border: 0.5px solid black;
+   position: absolute;
+   width: 100%;
+   height: 30%;
+   place-self: flex-end;
+   background-color: white;
+   filter: opacity(50%);
 }
 
 .city-container {
    display: grid;
    height: 48vh;
-   /* grid-auto-flow: row; */
    overflow-y: auto;
 }
 
@@ -110,7 +125,10 @@
 
 .tags-container {
    height: 47vh;
-   overflow: scroll;
+   overflow-y: auto;
+   display: flex;
+   flex-wrap: wrap;
+   place-content: space-evenly;
 }
 
 .tags-search {
@@ -127,4 +145,15 @@
 
 h2 {
    margin-top: auto;
+}
+
+.modal-screen {
+   height: 100vh;
+   filter: blur(50%);
+   place-content: center;
+}
+
+.modal-container {
+   height: 60vh;
+   background-color: aqua;
 }

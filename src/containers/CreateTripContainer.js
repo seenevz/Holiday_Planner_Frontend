@@ -34,8 +34,8 @@ class CreateTripContainer extends React.Component {
             <div className="create-trip-places-container">
                <div style={{ height: "100%" }}>{this.props.trip.city}</div>
                <div className="selection-container">
-                  <PlacesPickerContainer />
                   <PlacesSelectedContainer />
+                  <PlacesPickerContainer />
                </div>
             </div>
          </div>

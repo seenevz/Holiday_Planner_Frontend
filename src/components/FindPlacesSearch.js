@@ -11,7 +11,12 @@ export default class FindPlacesSearch extends React.Component {
             <div style={{ display: "flex", placeContent: "center" }}>
                {renderTags}
             </div>
-            <button style={{ gridRow: "2 / 3" }}>Search Places</button>
+            <button
+               style={{ gridRow: "2 / 3" }}
+               onClick={() => this.props.fetchPlaces()}
+            >
+               Search Places
+            </button>
          </>
       );
    }

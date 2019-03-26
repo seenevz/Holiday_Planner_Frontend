@@ -10,7 +10,13 @@ const setTag = (state, term) => {
 };
 
 export const appReducer = (
-   state = { section: "", results: [], tags: [], tagFilter: "" },
+   state = {
+      section: "",
+      results: [],
+      tags: [],
+      tagFilter: "",
+      placesResults: [],
+   },
    action
 ) => {
    console.log("State:", action);
@@ -25,6 +31,8 @@ export const appReducer = (
          return setTag(state, action.payload);
       case "SET_TAG_FILTER":
          return { ...state, tagFilter: action.payload };
+      case "SET_PLACES_RESULTS":
+         return { ...state, placesResults: action.payload };
       default:
          return state;
    }

@@ -15,6 +15,30 @@ const TAGS_QUERY = gql`
    }
 `;
 
+const PLACES_QUERY = gql`
+   query places($city: String!, $tags: [String!]!) {
+      places(city: $city, tags: $tags) {
+         id
+         name
+         intro
+         locationId
+         images {
+            sizes {
+               medium {
+                  url
+               }
+            }
+         }
+         score
+         snippet
+         coordinates {
+            latitude
+            longitude
+         }
+      }
+   }
+`;
+
 class FindPlaces extends React.Component {
    fetchTags = async city => {
       const result = await this.props.client.query({
@@ -23,6 +47,19 @@ class FindPlaces extends React.Component {
       });
       const tags = result.data.tags;
       this.props.setResults(tags);
+   };
+
+   fetchPlaces = async () => {
+      const tags = this.props.app.tags.map(tag => tag.label);
+      const city = this.props.trip.city;
+
+      const result = await this.props.client.query({
+         query: PLACES_QUERY,
+         variables: { city, tags },
+      });
+
+      const places = result.data.places;
+      this.props.setPlacesResults(places);
    };
 
    handleTagFilter = event => {
@@ -53,7 +90,10 @@ class FindPlaces extends React.Component {
             </div>
             <div className="tags-container">{renderTags}</div>
             <div className="tags-search">
-               <FindPlacesSearch tags={this.props.app.tags} />
+               <FindPlacesSearch
+                  fetchPlaces={this.fetchPlaces}
+                  tags={this.props.app.tags}
+               />
             </div>
          </div>
       );
@@ -70,6 +110,8 @@ export default withApollo(
                type: "SET_TAG_FILTER",
                payload: term,
             }),
+         setPlacesResults: results =>
+            dispatch({ type: "SET_PLACES_RESULTS", payload: results }),
       })
    )(FindPlaces)
 );

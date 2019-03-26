@@ -1,15 +1,9 @@
 import React from "react";
-import PlacePlaceholder from "../components/PlacePlacehoder";
+import PlacePlaceholder from "../components/PlaceCard";
 
 class PlacesSelectedContainer extends React.Component {
    render() {
-      return (
-         <div className="selected-places">
-            <PlacePlaceholder />
-            <PlacePlaceholder />
-            <PlacePlaceholder />
-         </div>
-      );
+      return <div className="selected-places" />;
    }
 }
 
