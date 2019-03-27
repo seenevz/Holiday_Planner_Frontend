@@ -8,7 +8,7 @@ export default class CreateTripForm extends React.Component {
    render() {
       const { title, mood, numberPeople, beginDate, endDate } = this.props;
       return (
-         <form className="create-form">
+         <form className="create-form" onSubmit={this.props.handleSaveButton}>
             <label htmlFor="title">Name your trip</label>
             <input
                id="title"

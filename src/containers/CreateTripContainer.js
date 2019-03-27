@@ -8,13 +8,20 @@ import FindPlaces from "./FindPlaces";
 import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
 
-SAVE_MUTATION = gql``;
+// SAVE_MUTATION = gql``;
 
 class CreateTripContainer extends React.Component {
    handleChangeInput = event => {
-      this.props.setTripField({ [event.target.name]: event.target.value });
+      this.props.setCityField({ [event.target.name]: event.target.value });
    };
-   handleSaveButton = () => {};
+   handleChangeForm = event => {
+      console.log("inside handle");
+      this.props.setTripContent({ [event.target.name]: event.target.value });
+   };
+   handleSaveButton = event => {
+      event.preventDefault();
+      console.log(this.props.trip);
+   };
    render() {
       return (
          <div className="create-trip-container">
@@ -24,6 +31,8 @@ class CreateTripContainer extends React.Component {
                      <>
                         {this.props.app.showSave ? (
                            <CreateTripForm
+                              handleChangeInput={this.handleChangeForm}
+                              handleSaveButton={this.handleSaveButton}
                               toggleShowSave={this.props.toggleShowSave}
                            />
                         ) : (
@@ -71,11 +80,13 @@ export default withApollo(
          ...state,
       }),
       dispatch => ({
-         setTripField: field =>
+         setCityField: field =>
             dispatch({ type: "SET_SEARCHTERM", payload: field.search }),
          setResults: results =>
             dispatch({ type: "SET_RESULTS", payload: results }),
          toggleShowSave: () => dispatch({ type: "TOGGLE_SHOW_SAVE" }),
+         setTripContent: field =>
+            dispatch({ type: "ADD_TRIP_FIELD", payload: field }),
       })
    )(CreateTripContainer)
 );
