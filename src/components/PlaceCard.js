@@ -8,7 +8,10 @@ class PlaceCard extends React.Component {
 
    render() {
       return (
-         <div className="place-card">
+         <div
+            className="place-card"
+            onClick={() => this.props.setPlaceCard(this.props.id)}
+         >
             <div>{this.props.name}</div>
             <img
                src={

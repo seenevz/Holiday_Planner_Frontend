@@ -6,7 +6,7 @@
 .create-trip-container {
    height: inherit;
    display: grid;
-   grid-template-columns: 33vw;
+   grid-template-columns: 34vw 66vw;
 }
 
 .create-trip-sidebar {
@@ -56,13 +56,17 @@
 }
 
 .selected-places {
-   display: grid;
-   grid-auto-flow: column;
+   overflow-x: auto;
    grid-row: 1 / 2;
-   height: 100%;
    width: 100%;
    border: 0.5px solid black;
    background: orange;
+   white-space: nowrap;
+}
+
+.selected-places > .place-card {
+   display: inline-flex;
+   height: 100%;
 }
 
 .place-card {
@@ -148,12 +152,38 @@ h2 {
 }
 
 .modal-screen {
+   display: grid;
+   width: 100vw;
    height: 100vh;
-   filter: blur(50%);
    place-content: center;
+   z-index: 9000;
+   background-color: rgba(0, 0, 0, 0.7);
+   position: fixed;
 }
 
 .modal-container {
-   height: 60vh;
+   display: grid;
+   grid-template-columns: 40% 60%;
+   height: 70vh;
    background-color: aqua;
+   width: 70vw;
+}
+
+.modal-map {
+   border: 0.5px solid black;
+   width: 100%;
+   overflow: hidden;
+   display: grid;
+}
+
+.modal-map > img {
+   height: 100%;
+   place-self: center;
+}
+
+.modal-content {
+   display: grid;
+   grid-template-rows: 90% 10%;
+   grid-row: 1 / 2;
+   border: 0.5px solid black;
 }

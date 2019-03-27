@@ -5,12 +5,12 @@ import Login from "../components/Login";
 import NavBar from "../components/NavBar";
 import HomeContainer from "./HomeContainer";
 import "../style/index.css";
+import Modal from "../components/Modal";
 
 class App extends Component {
    render() {
       return (
          <>
-            <NavBar />
             <Switch>
                <Route
                   exact

@@ -1,10 +1,15 @@
 import React from "react";
-import PlacePlaceholder from "../components/PlaceCard";
+import { connect } from "react-redux";
+
+import PlaceCard from "../components/PlaceCard";
 
 class PlacesSelectedContainer extends React.Component {
    render() {
-      return <div className="selected-places" />;
+      const selectedPlaces = this.props.trip.places.map(place => (
+         <PlaceCard key={place.id} {...place} />
+      ));
+      return <div className="selected-places">{selectedPlaces}</div>;
    }
 }
 
-export default PlacesSelectedContainer;
+export default connect(state => ({ ...state }))(PlacesSelectedContainer);

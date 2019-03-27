@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 class PlacesPickerContainer extends React.Component {
    render() {
       const placesResults = this.props.app.placesResults;
-      const renderPlaces = placesResults.map(place => <PlaceCard {...place} />);
+      const renderPlaces = placesResults.map(place => (
+         <PlaceCard setPlaceCard={this.props.setPlaceCard} {...place} />
+      ));
 
       return (
          <div className="create-trip-places-picker">
@@ -15,4 +17,10 @@ class PlacesPickerContainer extends React.Component {
    }
 }
 
-export default connect(state => ({ ...state }))(PlacesPickerContainer);
+export default connect(
+   state => ({ ...state }),
+   dispatch => ({
+      setPlaceCard: placeCard =>
+         dispatch({ type: "SET_PLACE_CARD", payload: placeCard }),
+   })
+)(PlacesPickerContainer);

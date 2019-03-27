@@ -9,6 +9,14 @@ const setTag = (state, term) => {
    return { ...state, tags: setTags };
 };
 
+const setPlaceCard = (state, card) => {
+   const stateCard = state.placeCard;
+
+   return stateCard === card
+      ? { ...state, placeCard: "" }
+      : { ...state, placeCard: card };
+};
+
 export const appReducer = (
    state = {
       section: "",
@@ -16,6 +24,7 @@ export const appReducer = (
       tags: [],
       tagFilter: "",
       placesResults: [],
+      placeCard: "",
    },
    action
 ) => {
@@ -33,6 +42,10 @@ export const appReducer = (
          return { ...state, tagFilter: action.payload };
       case "SET_PLACES_RESULTS":
          return { ...state, placesResults: action.payload };
+      case "SET_PLACE_CARD":
+         return setPlaceCard(state, action.payload);
+      case "CLEAR_PLACE_CARD":
+         return { ...state, placeCard: "" };
       default:
          return state;
    }
