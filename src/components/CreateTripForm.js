@@ -1,23 +1,19 @@
 import React from "react";
 
 export default class CreateTripForm extends React.Component {
-   render() {
-      const {
-         country,
-         city,
-         mood,
-         numberPeople,
-         beginDate,
-         endDate,
-      } = this.props;
+   componentDidMount() {
+      this.props.toggleShowSave();
+   }
 
+   render() {
+      const { title, mood, numberPeople, beginDate, endDate } = this.props;
       return (
          <form className="create-form">
-            <label htmlFor="country">Country</label>
+            <label htmlFor="title">Name your trip</label>
             <input
-               id="country"
-               name="country"
-               value={country}
+               id="title"
+               name="title"
+               value={title}
                onChange={this.props.handleChangeInput}
             />
             <label htmlFor="mood">Mood</label>
@@ -49,7 +45,7 @@ export default class CreateTripForm extends React.Component {
                onChange={this.props.handleChangeInput}
             />
             <div>
-               <button type="submit">Search</button>
+               <button type="submit">Save</button>
             </div>
          </form>
       );

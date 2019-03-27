@@ -12,6 +12,7 @@
 .create-trip-sidebar {
    display: grid;
    height: inherit;
+   grid-template-rows: 90% 10%;
 }
 
 .create-form {
@@ -19,7 +20,7 @@
    grid-template-rows: 1fr 3fr;
    grid-column: 1 / 2;
    background: yellow;
-   height: 70%;
+   height: 80%;
    width: 80%;
    place-self: center;
    border: 0.5px solid black;

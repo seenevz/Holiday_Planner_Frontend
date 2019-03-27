@@ -25,6 +25,7 @@ export const appReducer = (
       tagFilter: "",
       placesResults: [],
       placeCard: "",
+      showSave: false,
    },
    action
 ) => {
@@ -46,6 +47,8 @@ export const appReducer = (
          return setPlaceCard(state, action.payload);
       case "CLEAR_PLACE_CARD":
          return { ...state, placeCard: "" };
+      case "TOGGLE_SHOW_SAVE":
+         return { ...state, showSave: !state.showsave };
       default:
          return state;
    }
