@@ -26,6 +26,7 @@ export const appReducer = (
       placesResults: [],
       placeCard: "",
       showSave: false,
+      currentTrips: [],
    },
    action
 ) => {
@@ -49,6 +50,8 @@ export const appReducer = (
          return { ...state, placeCard: "" };
       case "TOGGLE_SHOW_SAVE":
          return { ...state, showSave: !state.showsave };
+      case "SET_CURRENT_TRIPS":
+         return { ...state, currentTrips: action.payload };
       default:
          return state;
    }

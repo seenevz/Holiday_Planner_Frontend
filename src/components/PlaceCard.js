@@ -10,7 +10,11 @@ class PlaceCard extends React.Component {
       return (
          <div
             className="place-card"
-            onClick={() => this.props.setPlaceCard(this.props.id)}
+            onClick={
+               this.props.setPlaceCard
+                  ? () => this.props.setPlaceCard(this.props.id)
+                  : ""
+            }
          >
             <div>{this.props.name}</div>
             <img

@@ -31,9 +31,11 @@ const SIGNUP_MUTATION = gql`
          currency: $currency
          authProvider: { credentials: { email: $email, password: $password } }
       ) {
-         id
-         firstName
-         currency
+         token
+         user {
+            id
+            firstName
+         }
       }
    }
 `;
@@ -69,6 +71,15 @@ class Login extends React.Component {
       // debugger;
    };
 
+   _signInConfirm = data => {
+      const token = data.createUser.token;
+      const user = data.createUser.user;
+
+      this._saveUserData(token);
+      this.props.addUser({ ...user });
+      this.props.history.push("/home");
+   };
+
    _saveUserData = token => {
       sessionStorage.setItem("authToken", token);
    };
@@ -97,7 +108,11 @@ class Login extends React.Component {
                         lastName,
                         currency,
                      }}
-                     onCompleted={data => this._confirm(data)}
+                     onCompleted={
+                        login
+                           ? data => this._confirm(data)
+                           : data => this._signInConfirm(data)
+                     }
                   >
                      {mutation => (
                         <form

@@ -8,19 +8,68 @@ import FindPlaces from "./FindPlaces";
 import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
 
-// SAVE_MUTATION = gql``;
+const SAVE_MUTATION = gql`
+   mutation createTrip(
+      $title: String!
+      $mood: String!
+      $numberPeople: String!
+      $beginDate: String!
+      $endDate: String!
+   ) {
+      createTrip(
+         fields: {
+            title: $title
+            mood: $mood
+            numberPeople: $numberPeople
+            beginDate: $beginDate
+            endDate: $endDate
+         }
+      ) {
+         id
+      }
+   }
+`;
+
+const SAVE_PLACES_MUTATION = gql`
+   mutation createPlace($name: String!, $placeId: String!, $tripId: String!) {
+      createPlace(name: $name, placeId: $placeId, tripId: $tripId) {
+         id
+      }
+   }
+`;
 
 class CreateTripContainer extends React.Component {
+   runPlaceMutation = async (place, trip) => {
+      const obj = { placeId: place.id, name: place.name, tripId: trip.id };
+      await this.props.client.mutate({
+         mutation: SAVE_PLACES_MUTATION,
+         variables: { ...obj },
+      });
+   };
+
    handleChangeInput = event => {
       this.props.setCityField({ [event.target.name]: event.target.value });
    };
    handleChangeForm = event => {
-      console.log("inside handle");
       this.props.setTripContent({ [event.target.name]: event.target.value });
    };
-   handleSaveButton = event => {
+   handleSaveButton = async event => {
       event.preventDefault();
       console.log(this.props.trip);
+      try {
+         const trip = await this.props.client.mutate({
+            mutation: SAVE_MUTATION,
+            variables: { ...this.props.trip },
+         });
+         await this.props.trip.places.map(place =>
+            this.runPlaceMutation(place, trip.data.createTrip)
+         );
+
+         await this.props.fetchTrips();
+         this.props.setSection("");
+      } catch (error) {
+         console.warn(error);
+      }
    };
    render() {
       return (
@@ -87,6 +136,10 @@ export default withApollo(
          toggleShowSave: () => dispatch({ type: "TOGGLE_SHOW_SAVE" }),
          setTripContent: field =>
             dispatch({ type: "ADD_TRIP_FIELD", payload: field }),
+         setSection: section =>
+            dispatch({ type: "SET_SECTION", payload: section }),
+         setTrips: results =>
+            dispatch({ type: "SET_CURRENT_TRIPS", payload: results }),
       })
    )(CreateTripContainer)
 );
