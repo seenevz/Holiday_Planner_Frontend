@@ -16,7 +16,12 @@ class NavBar extends React.Component {
 
       return (
          <div className="top">
-            <div className="user">{firstName}</div>
+            <div
+               className="user"
+               onClick={() => this.props.setSelectedTrip("")}
+            >
+               {firstName}
+            </div>
             <div className="nav-button">
                {firstName && (
                   <button onClick={this.handleLogout}>Logout</button>
@@ -32,6 +37,10 @@ export default withRouter(
       state => ({
          user: state.user,
       }),
-      dispatch => ({ clearUser: () => dispatch({ type: "CLEAR_USER" }) })
+      dispatch => ({
+         clearUser: () => dispatch({ type: "CLEAR_USER" }),
+         setSelectedTrip: tripId =>
+            dispatch({ type: "SET_SELECTED_TRIP", payload: tripId }),
+      })
    )(NavBar)
 );

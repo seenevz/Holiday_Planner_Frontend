@@ -183,10 +183,15 @@ h2 {
 }
 
 .modal-content {
+   height: inherit;
    display: grid;
    grid-template-rows: 90% 10%;
    grid-row: 1 / 2;
    border: 0.5px solid black;
+}
+.modal-content-text {
+   overflow: scroll;
+   height: 100%;
 }
 
 .current-trips-container {

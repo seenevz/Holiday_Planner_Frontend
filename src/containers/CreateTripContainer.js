@@ -31,8 +31,8 @@ const SAVE_MUTATION = gql`
 `;
 
 const SAVE_PLACES_MUTATION = gql`
-   mutation createPlace($name: String!, $placeId: String!, $tripId: String!) {
-      createPlace(name: $name, placeId: $placeId, tripId: $tripId) {
+   mutation createPlace($name: String!, $id: String!, $tripId: String!) {
+      createPlace(name: $name, id: $id, tripId: $tripId) {
          id
       }
    }
@@ -40,7 +40,8 @@ const SAVE_PLACES_MUTATION = gql`
 
 class CreateTripContainer extends React.Component {
    runPlaceMutation = async (place, trip) => {
-      const obj = { placeId: place.id, name: place.name, tripId: trip.id };
+      const obj = { id: place.id, name: place.name, tripId: trip.id };
+      debugger;
       await this.props.client.mutate({
          mutation: SAVE_PLACES_MUTATION,
          variables: { ...obj },
@@ -61,6 +62,7 @@ class CreateTripContainer extends React.Component {
             mutation: SAVE_MUTATION,
             variables: { ...this.props.trip },
          });
+         debugger;
          await this.props.trip.places.map(place =>
             this.runPlaceMutation(place, trip.data.createTrip)
          );

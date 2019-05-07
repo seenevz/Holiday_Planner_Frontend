@@ -1,14 +1,13 @@
 .container {
    height: 100vh;
    display: grid;
-   grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
-   justify-content: space-around;
+   /* justify-content: space-around; */
    border: 0.5px solid black;
 }
 
 .item {
-   grid-area: 2/2;
-   height: 100%;
+   height: 50%;
+   width: 55%;
    display: block;
    border: 0.5px solid black;
    place-self: center;

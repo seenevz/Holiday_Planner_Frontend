@@ -3,12 +3,11 @@ import defaultImg from "../default.jpg";
 
 export default class Modal extends React.Component {
    render() {
-      console.log("modal props", this.props);
       return (
          <div onClick={() => this.props.onClear()} className="modal-screen">
             <div className="modal-container">
                <div className="modal-content">
-                  <div>
+                  <div className="modal-content-text">
                      <h2>{this.props.placeCard.name}</h2>
                      <p>{this.props.placeCard.intro}</p>
                   </div>
